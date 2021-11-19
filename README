@@ -1,5 +1,5 @@
-				 CatB:
-		     Troff -mb Unauthorized Edition
+                                 CatB:
+                     Troff -mb Unauthorized Edition
 
 After creating the -mb macro package for troff, I wanted to test it with
 a real book.  I also wanted to read «The Cathedral and The Bazaar».  So,
