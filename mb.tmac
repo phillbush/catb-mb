@@ -1,0 +1,616 @@
+.\" common macros
+.       \" begin of document
+.de bG
+.fi
+.ll \\n(LLu
+.lt \\n(LLu
+.wh 0 tM
+.wh 12i bM
+.wh -\\n(MBu nX
+.ch bM -\\n(MBu
+.wh -\\n(MBu/2u bT
+.tM
+.nr iN 0
+.nr bG 1
+.pl \\n(PHu
+..
+.       \" begin of body
+.de bY
+.fi
+.if !\\n(bG .bG
+.sp 2
+.ns
+.nr bY 1
+..
+.       \" top margin
+.de tM
+'sp \\n(MTu/3u
+.ev 2
+.lt \\n(LLu
+.ft R
+.tT
+.if o .po \\n(MOu
+.if e .po \\n(MEu
+.ev
+'sp |\\n(MTu
+'ns
+.nr fI 0
+.nr sI 0
+.nr nI 0 1
+.nr nP 0-\\n(MB
+.ch bM -\\n(MBu
+.if \\n(dn .nZ
+..
+.       \" bottom margin
+.de bM
+.nr dn 0
+.if \\n(nI \{\
+.       if \\n(nlu+1v>(\\n(.pu-\\n(MBu) .ch nX \\n(nlu+1.9v
+.       ev 1
+.       nf
+.       nN
+.       rm nN
+.       if \\n(.znY .di
+.       nr nI 0
+.       ev
+.\}
+'bp
+..
+.       \" reset
+.de rT
+.nr mT 1
+.if !\\n(bY .bY
+.br
+.ce 0
+.fi
+.ad b
+.hy 14
+.ie \\n(n? \{\
+.       ps \\n(PS-2
+.       vs \\n(VS-2
+.\}
+.el \{\
+.       ps \\n(PS
+.       vs \\n(VS
+.\}
+.if n .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n 80n
+.if t .ta 5n 10n 15n 20n 25n 30n 35n 40n 45n 50n 55n 60n 65n 70n 75n
+..
+.       \" author
+.de AU
+.ce 999
+.ft I
+.ps \\n(PS
+.vs \\n(VS
+.sp .5
+.nf
+\\$1
+.if !"\\$2"" \{\
+.br
+\\$2
+.\}
+..
+.       \" paragraph
+.de PP
+.pB
+.rT
+.ie \\n(sI     .sp 1
+.el .ie \\n(fI .sp \\n(FDu
+.el            .sp \\n(PDu
+.ne 1+\\n(.Vu
+.ft R
+.nr x 0
+.in \\n(i\\n(iNu
+.if \\n(PT .if !"\\$1"" .nr x 1
+.if !\\n(n? \{\
+.       ie \\nx \{\
+.               in \\n(i\\n(iNu+\\n(PTu
+.               ti \\n(i\\n(iNu
+.               ta \\n(PTu
+.\}
+.       el .ie \\n(SP=1                 .ti \\n(.iu+\\n(PIu
+.       el .if \\n(SP=2 .if !\\n(fI .ti \\n(.iu+\\n(PIu
+.       if \\n(PN \fB\\n+(pC\&.\fP
+.\}
+.nr fI 0
+.nr sI 0
+.if !"\\$1"" .if !\\nx \fB\\$1\fP
+.if !"\\$1"" .if \\nx  \fB\\$1\fP\t\c
+..
+.       \" title
+.de TL
+.rm sH
+.nr mT 0
+.if !\\n(bG .bG
+.ad c
+.ft B
+.ps \\n(PS+24
+.vs \\n(VS+24p
+.ne 4
+.hy 0
+.ds tL \\$1
+\\$1
+.if !"\\$2"" \{\
+.ds tL "\\*(tL \\$2"
+.br
+\\$2
+.\}
+.if !"\\$3"" \{\
+.ds tL "\\*(tL \\$3"
+.br
+\\$3
+.\}
+.if !"\\$4"" \{\
+.ds tL "\\*(tL \\$4"
+.br
+\\$4
+.\}
+.if !"\\$5"" \{\
+.ds tL "\\*(tL \\$5"
+.br
+\\$5
+.\}
+.\XPDFMark: Title \\*(tL
+..
+.       \" common macro called by CH and AX
+.de hD
+.rT
+.ce 0
+.rm sH
+.nr mT 0
+.if \\n%>1       .bp
+.if \\n%>1 .if e .bp +1
+.ie \\*(cH .nr % 1
+.nr pC 0 1
+.nr nC 0 1
+.nr bY 0
+.nr h0 +1
+.nr h1 0
+.nr h2 0
+.nr h3 0
+.nr h4 0
+.nr h5 0
+.if !\\n(bG .bG
+.fi
+.ad r
+.ft B
+.ps \\n(PS+30
+.vs \\n(VS+30p
+.ne 4
+.hy 0
+..
+.       \" chapter
+.de CH
+.hD
+.ds cH \\n(h0. \\$1
+\XPDFMark: Bookmark 0 \\*(cH\\n(h0
+.br
+\\$1
+.tm index:.IC "\\n%" "\\n(h0" "\\$1"
+..
+.       \" appendix
+.de AX
+.nr h0 0 1
+.af h0 A
+.hD
+.ds cH \\*X \\n(h0: \\$1
+\XPDFMark: Bookmark 0 \\*(cH\\*X \\n(h0
+.br
+\\$1
+.tm index:.IC "\\n%" "\\n(h0" "\\$1"
+..
+.       \" SH - section heading
+.de SH
+.pB
+.rT
+.in \\n(.iu
+.ne 8.1
+.sp 1
+.ft B
+.sS
+.nr h\\$1 +1
+.in \\n(i\\n(iNu
+.if !\\$1-4 .nr h5 0
+.if !\\$1-3 .nr h4 0
+.if !\\$1-2 .nr h3 0
+.if !\\$1-1 .nr h2 0
+.if !\\$1 .if \\n(.$ .nr h1 1
+.if \\$1S \{\
+.	nr h1 \\$2 0
+.	nr h2 \\$3 0
+.	nr h3 \\$4 0
+.	nr h4 \\$5 0
+.	nr h5 \\$6 0
+.\}
+.if \\n(SS                  .ds sN \\n(h1.
+.if \\n(SS   .if !"\\*(cH"" .ds sN \\n(h0.\\n(h1.
+.if \\n(SS>1 .if \\$1-1     .as sN \\n(h2.
+.if \\n(SS>2 .if \\$1-2     .as sN \\n(h3.
+.if \\n(SS>3 .if \\$1-3     .as sN \\n(h4.
+.if \\n(SS>4 .if \\$1-4     .as sN \\n(h5.
+.ie !"\\*cH""   .nr sL \\$1
+.el             .nr sL \\$1-1
+.ie \\n(SS \{\
+\XPDFMark: Bookmark \\n(sL \\*(sN \\$2\\*(sN
+\\$2
+.\}
+.el \{\
+\XPDFMark: Bookmark \\n(sL \\*(sN \\$2\\$2
+.\}
+.nr sI 1
+.nr fI 0
+.tm index:.IS "\\n%" "\\*(sN" "\\$2"
+.ds sH \\*(sN \\$2
+..
+.       \" figure start
+.de FS
+.br
+.in 0
+.ti 0
+.di fG
+..
+.       \" figure end
+.de FE
+.br
+.di
+.nf
+.ne \\n(dnu
+.ie \\n(sI     .sp 1
+.el            .sp \\n(FDu
+.ns
+.fG
+.nr fI 1
+.nr sI 0
+..
+.       \" figure caption
+.de FC
+.ps \\n(PS
+.vs \\n(VS
+.nr fC \\n(.u
+.di fC
+.ie "\\$2"t" \{\
+.nr tN +1
+\fB\\*T \\n(tN:\0\fR\\$1
+.\}
+.el \{\
+.nr fN +1
+\fB\\*F \\n(fN:\0\fR\\$1
+.\}
+.br
+.di
+.in ((\\n(.lu-\\n(.iu)/2u)-(\\n(dlu/2u)
+.fi
+.ad b
+.fC
+.in
+.ie \\(fC .fi
+.el       .nf
+.rm fC
+.rr fC
+..
+.       \" table start
+.de TS
+.br
+.nf
+..
+.       \" picture start
+.de PS
+.in ((\\n(.lu-\\n(.iu)/2u)-(\\$2/2u)
+..
+.       \" picture end
+.de PE
+.in
+..
+.       \" code start
+.de CS
+.in +\\n(PIu
+.nr iN +1
+.nr i\\n(iN \\n(.i
+.nf
+.ps \\n(PS-1
+.vs \\n(VS-1
+.ft CW
+..
+.       \" code end
+.de CE
+.ft P
+.ps \\n(PS
+.vs \\n(VS
+.nr iN -1
+.in \\n(i\\n(iNu
+.fi
+..
+.       \" abstract begin
+.de AS
+.pB
+.rT
+.sp 2
+.if !"\\*A"" \{\
+.ce 1
+\fB\\*A\fP
+.\}
+.fi
+.ll \\n(LLu-\\n(PIu
+.in +\\n(PIu
+.nr iN +1
+.nr i\\n(iN \\n(.i
+..
+.       \" abstract end
+.de AE
+.nr iN -1
+.in \\n(i\\n(iNu
+.ll \\n(LLu
+..
+.       \" quote start
+.de QS
+.in +\\n(PIu
+.nr iN +1
+.nr i\\n(iN \\n(.i
+..
+.       \" quote end
+.de QE
+.br
+.nr iN -1
+.in \\n(i\\n(iNu
+..
+.       \" list start
+.de LS
+.rT
+.ft R
+.br
+.ie \\n(sI     .sp 1
+.el .if \\n(fI .sp \\n(FDu
+.nr lN +1
+.ie !"\\$1"" \{\
+.       af l\\n(lN \\$1
+.       ie \\n(lN>1 .in +4n
+.       el          .in +3n
+.\}
+.el          \{\
+.       ds l\\n(lN b
+.       ie \\n(lN>1 .in +4n
+.       el          .in +2n
+.\}
+.nr iN +1
+.nr i\\n(iN \\n(.iu
+.nr sI 0
+.nr fI 0
+..
+.       \" list end
+.de LE
+.br
+.rr l\\n(lN
+.rm l\\n(lN
+.nr iN -1
+.in \\n(i\\n(iNu
+.nr lN -1
+..
+.       \" list item
+.de LI
+.br
+.nr l\\n(lN +1
+.ie "\\*(l\\n(lN"b" \{\
+.ti -2n
+.ta 2n
+\fB\(bu\t\fP\c
+.\}
+.el                 \{\
+.ti -3n
+.ta 3n
+\fB\\n(l\\n(lN\&.\t\fP\c
+.\}
+.if !"\\$1"" \fB\\$1\fP
+..
+.       \" roman (regular) font
+.de R
+.ie \\n(.$=0 .ft R
+.el \&\\$3\fR\\$1\fP\\$2
+..
+.       \" superscript
+.de SP
+\&\\$3\s-2\v'-3p'\\$1\v'3p'\s0\\$2
+..
+.       \" subscript
+.de SB
+\&\\$3\s-2\v'3p'\\$1\v'-3p'\s0\\$2
+..
+.       \" bold font
+.de B
+.ie \\n(.$=0 .ft B
+.el \&\\$3\fB\\$1\fP\\$2
+..
+.       \" italic font
+.de I
+.ie \\n(.$=0 .ft I
+.el \&\\$3\fI\\$1\fP\\$2
+..
+.       \" constant width (monospace) font
+.de CW
+.ie \\n(.$=0 .ft CW
+.el \&\\$3\f(CW\\$1\fP\\$2
+..
+.       \" URI hyperlink
+.de HL
+\W\\$1\\$2
+..
+.       \" footnote start
+.de NS
+'if !\\n(nJ \&\s-2\v'-3p'\\n+(nC\v'3p'\s0\&\\$1
+.nr iS \\n(.i
+'da nN
+.ev 1
+.br
+.sp \\n(PDu
+.ll \\n(LLu
+.if \\n(n? \{\
+.       tm nested footnote
+.       ab
+.\}
+.nr n? 1
+.if \\n+(nI=1 \{
+.       in 0
+.       if n _________________________
+.       if t \l'\\n(LLu'
+.       br
+.\}
+.fi
+.if !\\n(nJ .SP \&\\n(nC
+..
+.       \" footnote end
+.de NE
+.br
+.ev
+'di
+'nr n? 0
+'nr nP -\\n(dn
+'if (\\n(nl+\\n(.v)<=(\\n(.p+\\n(nP) .ch bM \\n(nPu
+'if (\\n(nl+\\n(.v)>(\\n(.p+\\n(nP) \{\
+'	if \\n(nl>(\\n(MB+1.5v) .ch bM \\n(nlu+\\n(.vu
+'	if \\n(nl+\\n(MT+1v>\\n(.p .ch nX \\n(.pu-\\n(MTu+2v
+'	if \\n(nl<=(\\n(MB+1.5v) .ch bM \\n(MBu+(4u*\\n(.vu)
+'\}
+'in \\n(iSu
+..
+.       \" process footnote overflow
+.de nX
+.if \\n(nI .di nY
+..
+.       \" get leftover footnote
+.de nZ
+.nr nJ 1
+.NS
+.nf
+.nY
+.NE
+.nr nJ 0
+..
+.nr nC 0 1
+.nr pC 0 1
+.nr fN 0
+.nr tN 0
+.nr FL 5.5i
+.nr PD .3v
+.nr SP 1
+.nr SS 3
+.nr PN 0
+.nr PT 0
+.if n .nr PD 1v
+.if t .nr PD .3v
+.if n .nr FD 1v
+.if t .nr FD 1v
+.if "\*F"" .ds F Figure
+.if "\*T"" .ds T Table
+.if "\*J"" .ds J Contents
+.if "\*X"" .ds X Appendix
+.\" mb: macros for books
+.       \" top title
+.de tT
+.ps \\n(PS-2
+.vs \\n(VS-2p
+.ie \\*(cH .tl 
+.el .ie \\n(mT \{
+.       if e \{\
+.              ie !\\*(cH .tl %\\*(cH
+.              el               .tl %\\*(tL
+.       \}
+.       if o \{\
+.              ie !\\*(sH .tl \\*(sH%
+.              el               .tl %
+.       \}
+.       br
+.       in 0
+.       if n _________________________
+.       if t \l'\\n(LLu'
+.       br
+.\}
+.el .tl 
+..
+.       \" paragraph break
+.de pB
+.br
+..
+.       \" setup section
+.de sS
+.ps \\n(PS+2
+.vs \\n(VS+2p
+..
+.       \" table of contents
+.de TC
+.bp
+.if \\n%>1 .if e .bp +1
+.ce 0
+.fi
+.ad r
+.ft B
+.ps \\n(PS+30
+.vs \\n(VS+30p
+\\*J
+.ps \\n(PS
+.vs \\n(VSp
+.sp 4
+.ns
+.rT
+.ad l
+..
+.       \" index chapter
+.de IC
+.ne 12
+.ta 0
+.sp 1v
+.ad l
+.ft B
+.in 0
+.mk
+\\$2
+.br
+.rt
+.in 3n
+.ll \\n(LLu-5n
+\\$3
+.mk
+.br
+.rt
+.in 0
+.ll \\n(LLu
+.ad r
+\\$1
+.ft P
+.br
+.sp .3v
+.ns
+..
+.       \" index section
+.de IS
+.if (\\n(nlu+1v)>=(\\n(.pu-\\n(MBu) .bp
+.sp .1v
+.ad l
+.ft R
+.in 3n
+.mk
+\\$2
+.br
+.rt
+.in 9n
+.ll \\n(LLu-5n
+\\$3
+.mk
+.br
+.rt
+.in 0
+.ll \\n(LLu
+.ad r
+\\$1
+.ft P
+.br
+..
+.       \" initialization
+.nr PI 5n
+.nr PS 12
+.nr VS 14
+.       \" page size (ISO B5)
+.if !\n(LL .nr LL 4.9i  \" line length
+.if !\n(MB .nr MB 1i    \" bottom margin
+.if !\n(ME .nr ME 1i    \" left margin for even pages
+.if !\n(MO .nr MO 1i    \" left margin for odd pages
+.if !\n(MT .nr MT 1i    \" top margin
+.if !\n(PH .nr PH 9.8i  \" page height

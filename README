@@ -1,0 +1,49 @@
+				 CatB:
+		     Troff -mb Unauthorized Edition
+
+After creating the -mb macro package for troff, I wanted to test it with
+a real book.  I also wanted to read «The Cathedral and The Bazaar».  So,
+since the Copyright permits, I am doing both at the same time.
+
+The document is distributed with the mb.tmac macro package, which I used
+to format the document using troff.
+
+§ Punctuation
+
+Although I did not changed the text, I changed the punctuation.
+
+The ASCII-style double quotes (``…'') were replaced by actual Unicode
+double quotes (“…”).  ASCII-style single quotes (`…') were replaced by
+actual Unicode double quotes (‘…’).
+
+Em-dashes (—) were replaced by parentheses.  Em-dashes are hard to
+distinguish from regular hyphens and, since they have parenthetical
+purposes, why not use parentheses?  That seems to be an English thing,
+because in my native language parenthesis (the rhetorical artifact) is
+marked out by parentheses (the punctuation).
+
+En-dashes (–) were replaced by tildes.  En-dashes mark ranges (as in
+1973–1975; but, as em-dashes, they are hard to distinguish from regular
+hyphens.  I usually use tildes (~) to mark ranges; so I replaced
+en-dashes with them.
+
+Periods (the punctuation) terminates periods (the rethorical artifact
+(which corresponds approximately with a whole sentence)).  But modern
+typography has this thing in which abbreviations are also marked out
+by a period.  Previously, abbreviations were marked by an apostrophe.
+Since it is hard (for a computer) to distinguish whether a period is
+marking the end of a period or the end of an abbreviation, I replaced
+all abbreviation-periods with apostrophes (that's what some writing
+systems, such as Hebrew, do (although their apostrophe has other name
+(geresh))).
+
+The author uses <emphasis>...</emphasis> to emphasize text.  On paper
+and on Browser, emphasized text is often rendered in Italic font.
+However, font change is almost impossible to do on a terminal, and is
+often ignored.  I avoid doing font-changing for semantical purposes.
+However, I'm rendering emphasis in Italic font, as the original.
+Particularly, I do emphasis by ALLCAPS (and how do I distinguish
+an emphasis from an abbreviation? (with the apostrophe!)).
+
+I also moved the notes from the end of each chapter to the page they are
+referred. (So they are now footnotes, no more endnotes).
