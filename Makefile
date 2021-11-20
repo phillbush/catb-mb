@@ -13,10 +13,10 @@ all: ${PDF}
 .out.ps:
 	dpost <$< >$@
 
-${OUT}: fonts.roff title.roff index.roff ${SRCS}
+${OUT}: mb.tmac fonts.roff title.roff index.roff ${SRCS}
 	troff -mpictures mb.tmac fonts.roff title.roff index.roff ${SRCS} 2>/dev/null >${OUT}
 
-index.roff: ${SRCS}
+index.roff: mb.tmac fonts.roff ${SRCS}
 	troff -mpictures mb.tmac fonts.roff ${SRCS} 2>&1 >/dev/null | grep '^index:' | sed 's/index://' >index.roff
 
 clean:

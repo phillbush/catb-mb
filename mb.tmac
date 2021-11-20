@@ -435,6 +435,7 @@
 ..
 .       \" footnote start
 .de NS
+'if !\\n(nJ 'if \\n(nlu+3v>=(\\n(.pu-\\n(MBu) .bM
 'if !\\n(nJ \&\s-2\v'-3p'\\n+(nC\v'3p'\s0\&\\$1
 .nr iS \\n(.i
 'da nN
@@ -463,11 +464,12 @@
 'di
 'nr n? 0
 'nr nP -\\n(dn
-'if (\\n(nl+\\n(.v)<=(\\n(.p+\\n(nP) .ch bM \\n(nPu
+'nr nP -1v
+'if (\\n(nl+\\n(.v)<=(\\n(.p+\\n(nP) 'ch bM \\n(nPu
 'if (\\n(nl+\\n(.v)>(\\n(.p+\\n(nP) \{\
-'	if \\n(nl>(\\n(MB+1.5v) .ch bM \\n(nlu+\\n(.vu
-'	if \\n(nl+\\n(MT+1v>\\n(.p .ch nX \\n(.pu-\\n(MTu+2v
-'	if \\n(nl<=(\\n(MB+1.5v) .ch bM \\n(MBu+(4u*\\n(.vu)
+'	if \\n(nl>(\\n(MB+1.5v) 'ch bM \\n(nlu+\\n(.vu
+'	if \\n(nl+\\n(MT+1v>\\n(.p 'ch nX \\n(.pu-\\n(MTu+2v
+'	if \\n(nl<=(\\n(MB+1.5v) 'ch bM \\n(MBu+(4u*\\n(.vu)
 '\}
 'in \\n(iSu
 ..
