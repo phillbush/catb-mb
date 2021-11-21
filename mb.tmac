@@ -117,6 +117,19 @@
 .if !"\\$1"" .if !\\nx \fB\\$1\fP
 .if !"\\$1"" .if \\nx  \fB\\$1\fP\t\c
 ..
+.       \" stanza (unfilled paragraph)
+.de SZ
+.pB
+.rT
+.nf
+.ie \\n(sI     .sp 1
+.el .ie \\n(fI .sp \\n(FDu
+.el            .sp \\n(PDu
+.ne 1+\\n(.Vu
+.ft R
+.nr fI 0
+.nr sI 0
+..
 .       \" title
 .de TL
 .rm sH
